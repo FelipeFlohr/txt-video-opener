@@ -20,7 +20,7 @@ The "video number" indicates the current video you are iterating on. If you clic
 1. Q: Why did you make this?
 - A: Well, my friends and I decided to "do a [Watch2Gether](https://w2g.tv/)", but there were a lot of Facebook videos (almost 40), and the Facebook player runs kinda clunky on Watch2Gether, so I decided to open every video individually but it was a lot time-consuming. So, today I decided to code this to make things easier :)
 
-2. Q: Holy crap, this code looks like trash, won't you fix it?
+2. Q: Holy crap, this code looks like trash. Will you fix it?
 - A: Yes, I know. This code is far way from being good, since I don't know a single thing about web development. I'm currently learning Java, so maybe in the future I'll try to fix this, or make a better version, idk.
 
 3. Q: I found a bug, If I report, would you fix it?

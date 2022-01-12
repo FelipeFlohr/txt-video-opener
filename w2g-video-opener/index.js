@@ -2,7 +2,10 @@ let videos = null
 let currentVideo = 0
 
 // Adds an observer to the "Choose file" button
-var uploadButton = document.getElementById("upload-txt-btn")
+const uploadButton = document.getElementById("upload-txt-btn")
+const amountOfVideosTxt = document.getElementById("amount-videos")
+const uploadButtonDiv = document.getElementById("file-upload-btn")
+
 uploadButton.addEventListener("change", evento => {
     var fileNotParsed = uploadButton.files[0]
     fileNotParsed.text()
@@ -13,6 +16,10 @@ uploadButton.addEventListener("change", evento => {
                 .map(trimAll)
                 .filter(nonEmptyElements)
             console.log(videos)
+
+            currentVideo = 0
+            amountOfVideosTxt.innerHTML = `Amount of Videos: ${videos.length}`
+            uploadButtonDiv.hidden = true
             showButtons()
             updateButtons()
         })

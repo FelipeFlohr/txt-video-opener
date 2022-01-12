@@ -9,8 +9,10 @@
 </head>
 <body>
     <h1>2flps' Video Opener</h1>
-    <input type="file" id="upload-txt-btn" hidden/>
-    <label class="btn-label" for="upload-txt-btn"><p>Choose file</p></label>
+    <div id="file-upload-btn">
+        <input type="file" id="upload-txt-btn" hidden/>
+        <label for="upload-txt-btn"><span id="btn-p">Choose file...</span></label>
+    </div>
     <div id="nav-buttons" hidden>
         <button id="previous-video" onclick="prevBtn()">Previous video</button>
         <button id="current-video" onclick="currentBtn()">Open current video</button>

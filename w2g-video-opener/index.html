@@ -1,34 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Video opener</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2flps' Video Opener</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<h1>Video opener</h1>
-<p>Click the button below to open a .txt file containing the videos</p>
-
-<b>
-<label id="input-label">
-    Click me!
-    <input type="file" style="position: fixed; top: -100em" id="input-file" onchange="loadFile(this.files[0])">
-    <pre id="output"></pre>
-</label>
-</b>
-
-<h2 id="goto-title">Go to video:</h2>
-<label>
-    <button id="prev-video" onclick="decreaseNumber()">Previous video</button>
-    <button id="goto-video" onclick="openUrl()">Open link</button>
-    <button id="next-video" onclick="increaseNumber()">Next video</button>
-    Video number:
-    <span id="video-number">0</span>
-    | Total amount of videos:
-    <span id="amount-of-videos">0</span>
-</label>
+    <h1>2flps' Video Opener</h1>
+    <input type="file" id="upload-txt-btn" hidden/>
+    <label class="btn-label" for="upload-txt-btn"><p>Choose file</p></label>
+    <div id="nav-buttons" hidden>
+        <button id="previous-video" onclick="prevBtn()">Previous video</button>
+        <button id="current-video" onclick="currentBtn()">Open current video</button>
+        <button id="next-video" onclick="nextBtn()">Next video</button>
+        <p id="amount-videos">Amount of videos:</p>
+    </div>
 
 <script src="index.js"></script>
-
 </body>
 </html>

@@ -1,46 +1,94 @@
-// Returns an array containg each link
-async function loadFile(file){
-    let text = await file.text();
-    let textSplitted = text.split("\n");
-    for(let i = 0; i < textSplitted.length; i++){
-        if(textSplitted[i].includes("\r")){
-            textSplitted[i] = textSplitted[i].slice(0, -1);
-        }
+let videos = null
+let currentVideo = 0
+
+// Adds an observer to the "Choose file" button
+var uploadButton = document.getElementById("upload-txt-btn")
+uploadButton.addEventListener("change", evento => {
+    var fileNotParsed = uploadButton.files[0]
+    fileNotParsed.text()
+        .then(text => {
+            videos = text
+                .split("\n")
+                .map(removeBreakline)
+                .map(trimAll)
+                .filter(nonEmptyElements)
+            console.log(videos)
+            showButtons()
+            updateButtons()
+        })
+        .catch(err => window.alert("An error ocurred. File not read | Error " + err))
+})
+
+// Array cleaning functions
+const removeBreakline = videoUrl => videoUrl.replace("\r", "")
+const trimAll = element => element.trim()
+const nonEmptyElements = element => element != null && element != undefined && element != ""
+
+// Shows the previous, current and next button
+function showButtons() {
+    const elements = document.querySelectorAll("#nav-buttons")
+    console.log(elements)
+    elements.forEach(element => element.hidden = false)
+}
+
+// Defines the buttons' text
+function updateButtons() {
+    updatePreviousBtnTxt()
+    updateCurrentBtnTxt()
+    updateNextBtnTxt()
+}
+
+function updatePreviousBtnTxt() {
+    const previousBtn = document.getElementById("previous-video")
+    const prevNonExistent = currentVideo - 1 < 0
+    let btnString = null
+
+    if (prevNonExistent) {
+        btnString = `Previous video - / ${videos.length}`
+        previousBtn.disabled = true
+    } else {
+        btnString = `Previous video ${currentVideo} / ${videos.length}`
+        previousBtn.disabled = false
     }
-    var totalVideos = document.getElementById("amount-of-videos");
-    totalVideos.textContent = textSplitted.length;
-    return textSplitted;
+
+    previousBtn.innerHTML = btnString
 }
 
-function getTotalAmountOfVideos(){
-    var totalVideos = document.getElementById("amount-of-videos");
-    return parseInt(totalVideos.textContent);
+function updateCurrentBtnTxt() {
+    const currentBtn = document.getElementById("current-video")
+    currentBtn.innerHTML = `Open current video ${currentVideo + 1} / ${videos.length}`
 }
 
-function getVideoValue() {
-    var num = document.getElementById("video-number");
-    return parseInt(num.textContent);
-}
+function updateNextBtnTxt() {
+    const nextBtn = document.getElementById("next-video")
+    const nextNonExistent = currentVideo + 1 == videos.length
+    let btnString = null
 
-function increaseNumber(){
-    var num = document.getElementById("video-number");
-    if((getVideoValue() + 1) != getTotalAmountOfVideos()){
-        num.textContent = parseInt(num.textContent) + 1;
+    if (nextNonExistent) {
+        btnString = `Next video - / ${videos.length}`
+        nextBtn.disabled = true
+    } else {
+        btnString = `Next video ${currentVideo + 2} / ${videos.length}`
+        nextBtn.disabled = false
     }
+
+    nextBtn.innerHTML = btnString
 }
 
-function decreaseNumber(){
-    var num = document.getElementById("video-number");
-    if(getVideoValue() != 0){
-        num.textContent = parseInt(num.textContent) - 1;
-    }
+// Defines the button actions
+function prevBtn() {
+    currentVideo--
+    updateButtons()
+    console.log(currentVideo)
 }
 
-async function openUrl(){
-    var files = document.getElementById("input-file");
-    var file = await files.files[0];
-    var list = await loadFile(file);
+function currentBtn() {
+    window.open(videos[currentVideo])
+    console.log(currentVideo)
+}
 
-    console.log(list);
-    window.open(list[getVideoValue()]);
+function nextBtn() {
+    currentVideo++
+    updateButtons()
+    console.log(currentVideo)
 }
